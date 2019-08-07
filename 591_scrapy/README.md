@@ -41,7 +41,7 @@ python 591_scrapy.py
 - [591 爬蟲實戰(影片)](https://www.youtube.com/watch?v=zzMRbrOHlrk)
 - [Python 使用 Beautiful Soup 抓取與解析網頁資料，開發網路爬蟲教學](https://blog.gtwang.org/programming/python-beautiful-soup-module-scrape-web-pages-tutorial/2/)
 - [BeautifulSoup 提取某个tag标签里面的内容](https://blog.csdn.net/willib/article/details/52246086)
-	- [](https://github.com/popyue/591_scrapy/blob/master/591_scrapy/pic/parsehtmltag.png)
+	- [](/591_scrapy/pic/parsehtmltag.png)
 - [Compare two different files line by line in python](https://stackoverflow.com/questions/19007383/compare-two-different-files-line-by-line-in-python)
 - [lib-filecmp](https://docs.python.org/2/library/filecmp.html)
 - [lib-beautifulsoup](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/)
@@ -50,4 +50,4 @@ python 591_scrapy.py
 - [python中的全局变量,出现referenced before assignment的解决方案](https://zhouzaibao.iteye.com/blog/559381)
 - [Python: BeautifulSoup - get an attribute value based on the name attribute
 ](https://stackoverflow.com/questions/11205386/python-beautifulsoup-get-an-attribute-value-based-on-the-name-attribute)
-	- [](https://github.com/popyue/591_scrapy/blob/master/591_scrapy/pic/gettag.png)
+	- [](/591_scrapy/pic/gettag.png)
