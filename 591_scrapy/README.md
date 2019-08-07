@@ -26,6 +26,7 @@ python 591_scrapy.py
 2. now just parse the 1 page (30 item), we need to parse add data from 591 in the future(讓爬蟲能往後爬其他的頁面但不會有資料重複)
 3. Deploy to server and run it automatically(需用無限回銓重覆執行)
 4. 修改成更有效率的資料檢查方式(新舊資料比較方式修改)
+5. Try to parse 591 map site, it will ignore the bug#2, it won't have the page reload problem.
 
 <h3> Reference </h3>
 
