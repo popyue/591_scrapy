@@ -22,14 +22,16 @@ new_postID = []
 new_price = []
 delete_postID = []
 delete_price = []
+flag = 0
+
 # Read Line token from file
 with open("token.txt", 'r') as tokenfile:
 	token=tokenfile.read()
 tokenfile.close()
 
 def main():
-	#flag = 0
-	url = "https://rent.591.com.tw/?kind=1&order=money&orderType=desc&region=1&section=5&rentprice=6&pattern=3"
+	global flag
+	url = "https://rent.591.com.tw/?kind=1&order=money&orderType=desc&region=1&section=5&rentprice=5&pattern=3"
 	session_requests = requests.session()
 	res = session_requests.get(url)
 	res.encoding = 'utf-8'
@@ -44,19 +46,18 @@ def main():
 		totalitem = 30
 
 	# Get json Response
-	url_search = "https://rent.591.com.tw/home/search/rsList?is_new_list=1&type=1&kind=1&searchtype=1&order=money&orderType=desc&region=1&section=5&rentprice=6&pattern=3"
+	url_search = "https://rent.591.com.tw/home/search/rsList?is_new_list=1&type=1&kind=1&searchtype=1&order=money&orderType=desc&region=1&section=5&rentprice=5&pattern=3"
 	headers = {"X-Requested-With": "XMLHttpRequest","X-CSRF-TOKEN":tag_Daan_csrfval}
 	res2 = session_requests.get(url_search, headers=headers)
 	data = json.loads(res2.text)
 	#print(data.keys())
 	house_detail_all = data['data'] #get house data
 	for house in range(totalitem):
-		print('index house: %d' % house)
 		postID.append(house_detail_all.get('data')[house].get('id'))
 		price.append(house_detail_all.get('data')[house].get('price'))
 
 	# Check file exist or not
-	filepath =r"C:\\Users\\user\\Desktop\\postID_%s.txt" % currenttime
+	filepath =r"C:\\Users\\user\\Desktop\\python\\591_scrapy\\postID_%s.txt" % currenttime
 	if os.path.isfile(filepath):
 		print("The file postID_%s.txt is here" % currenttime)
 		duplicatefilecreate()
@@ -65,9 +66,10 @@ def main():
 	else:
 		print("The file postID_%s.txt isn't here, plz create one" % currenttime)
 		filecreate()
-	d_info=different()
+	different_info=different()
+	newitem_size = len(different_info[0])
+	deleteitem_size = len(different_info[2])
 	# Generate house detail url
-	print(d_info)
 	print('flag: %d' % flag)
 	#detail_price_message = "This House Price is %s" % detail_price # Get House Price
 	#print(detail_price_message)
@@ -76,13 +78,13 @@ def main():
 		print("Data isn't update")
 	elif flag == 1:
 		linenotification=line_notify.LineNotify(token)
-		for newpost,pricenew in range(len(d_info[0])):
-			detail_url = "https://rent.591.com.tw/rent-detail-%s.html" % d_info[0][newpost]
-			detail_price = re.sub(r"^\s+","",d_info[1][pricenew])
+		for newitemnumber in range(newitem_size):
+			detail_url = "https://rent.591.com.tw/rent-detail-%s.html" % different_info[0][newitemnumber]
+			detail_price = re.sub(r"^\s+","",different_info[1][newitemnumber])
 			linenotification.notify("New House : \n Price is: %s\n URL:\n %s "% (detail_price ,detail_url))
-		for delete_post,pricedelete in range(len(d_info[2])):
-			detail_url2 = "https://rent.591.com.tw/rent-detail-%s.html" % d_info[2][delete_post]
-			detail_price2 = re.sub(r"^\s+","",d_info[3][pricedelete])
+		for deleteitemnumber in range(deleteitem_size):
+			detail_url2 = "https://rent.591.com.tw/rent-detail-%s.html" % different_info[2][deleteitemnumber]
+			detail_price2 = re.sub(r"^\s+","",different_info[3][deleteitemnumber])
 			linenotification.notify("Delete House : \n Price is: %s\n URL:\n %s "% (detail_price2 ,detail_url2))
 	else:
 		pass
@@ -120,7 +122,6 @@ def filecreate():
 	for postwrite in range(len(postID)):
 		#f.write("Post ID is %s\r\n" % postID[j])
 		f.write("%s price is %s\r\n" % (postID[postwrite],price[postwrite]))
-		filedata = re.findall("postID_%s.txt" % currenttime)
 	f.close()
 def duplicatefilecreate():
 	f = open("postID_%s_new.txt" % currenttime , "w+")
@@ -130,7 +131,8 @@ def duplicatefilecreate():
 	f.close()
 
 def filecompare_newitem():
-	print("filecompare_new: {}".format(flag))
+	global flag
+	#print("filecompare_new: {}".format(flag))
 	# List new item and write to file 
 	with open("postID_%s.txt" % currenttime, "r") as file_old:
 		old = file_old.readlines()
@@ -147,7 +149,8 @@ def filecompare_newitem():
 	return flag
 
 def filecompare_deleteitem():
-	print("filecompare_delete: {}".format(flag))	
+	global flag
+	#print("filecompare_delete: {}".format(flag))	
 	with open("postID_%s.txt" % currenttime, "r") as file_old:
 		old = file_old.readlines()
 	file_old.close()
@@ -168,12 +171,16 @@ def filecompare_deleteitem():
 	
 
 if __name__ == '__main__':
-	global flag
-	flag = flag + 0
+	#global flag
+	#flag = flag + 0
 	#while(1):
 	main()
 	# Delete old file and rename new file
-	os.remove("postID_%s.txt" % currenttime)
-	print("File Delete!!!")
-	os.rename("postID_%s_new.txt" % currenttime,"postID_%s.txt" % currenttime)	
-	print("File Rename Finish!!!")
+	filepath2 =r"C:\\Users\\user\\Desktop\\python\\591_scrapy\\postID_%s_new.txt" % currenttime
+	if os.path.isfile(filepath2): 
+		os.remove("postID_%s.txt" % currenttime)
+		print("File Delete!!!")
+		os.rename("postID_%s_new.txt" % currenttime,"postID_%s.txt" % currenttime)	
+		print("File Rename Finish!!!")
+	else:
+		pass
