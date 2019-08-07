@@ -52,3 +52,14 @@ python 591_scrapy.py
 - [Python: BeautifulSoup - get an attribute value based on the name attribute
 ](https://stackoverflow.com/questions/11205386/python-beautifulsoup-get-an-attribute-value-based-on-the-name-attribute)
 	- ![](/591_scrapy/pic/gettag.png)
+- [How to condense if/else into one line in Python? [duplicate]
+](https://stackoverflow.com/questions/11529273/how-to-condense-if-else-into-one-line-in-python)
+- [How to Delete a File in Python](https://www.dummies.com/programming/python/how-to-delete-a-file-in-python/)
+- [Python 如何檢查檔案或目錄是否已經存在？](https://blog.gtwang.org/programming/python-howto-check-whether-file-folder-exists/)
+- [Python Rename File and Directory using os.rename()](https://www.guru99.com/python-rename-file.html)
+- [How to read a file line-by-line into a list?](https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list)
+- [Python File Handling: Create, Open, Append, Read, Write](https://www.guru99.com/reading-and-writing-files-in-python.html)
+- [關於Python使用requests的爬蟲問題](https://ithelp.ithome.com.tw/questions/10189512)
+- [https://www.itread01.com/hkhkyppq.html](https://www.itread01.com/hkhkyppq.html)
+- [輕鬆學習 Python：在學習網站爬蟲之前](https://medium.com/datainpoint/python-essentials-before-web-scraping-822b0b351bb3)
+- [【爬蟲筆記】如何在GCP上架設運行Python爬蟲程式](https://www.maxlist.xyz/2018/09/29/gcp_server_python/)
